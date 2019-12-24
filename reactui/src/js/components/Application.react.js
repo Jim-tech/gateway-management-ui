@@ -7,6 +7,7 @@ var Config = require('../Config');
 var Home = require('./Home.react');
 var Diagnostics = require('./Diagnostics.react');
 var About = require('./About.react');
+var Training = require('./Training.react');
 var Flux = require('../Flux');
 var React = require('react');
 var cookie = require('react-cookie');
@@ -82,6 +83,10 @@ class Application extends React.Component {
           onTouchTap={this.handleClick.bind(this, 'about')}>
           <i className="info circle icon"></i> About
         </a>
+        <a className={this.state.selectedMenu === 'training' ? 'active item' : 'item'}
+          onTouchTap={this.handleClick.bind(this, 'training')}>
+          <i className="search text icon"></i> Training
+        </a>        
       </div>
     );
 
@@ -95,6 +100,8 @@ class Application extends React.Component {
       content = <About />;
     } else if (this.state.selectedMenu === 'diagnostics') {
       content = <Diagnostics lights={this._generateLightsList()}/>;
+    } else if (this.state.selectedMenu === 'training') {
+      content = <Training />;
     }
 
     return (

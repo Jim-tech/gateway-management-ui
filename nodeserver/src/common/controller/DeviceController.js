@@ -971,6 +971,10 @@ function zclParseBufferRaw(datatype, buffer) {
       return null;
     }
 
+    if (datatype === 66) {
+      return zigbeeBuffer.readString();
+    }
+
     // Parse numbers based on type
     if (ZCLDataTypes[datatype].hasOwnProperty('signed')) {
       if(ZCLDataTypes[datatype].signed) {
@@ -991,6 +995,24 @@ function checkOffset(offset, ext, length) {
 }
 
 // Copy of NodeJS v4 function
+Buffer.prototype.readString = function(noAssert) {
+  offset = 1;
+  byteLength = this[0];
+  byteLength = byteLength >>> 0;
+  if (!noAssert)
+    checkOffset(offset, byteLength, this.length);
+
+  var val = ""
+  var i = 0;
+  for (var i = 0; i < byteLength; i++) {
+    val = val + String.fromCharCode(this[1 + i]);
+  }
+
+  Logger.server.info('Buffer.prototype.readString:' + val);
+  return val;
+};
+
+// Copy of NodeJS v4 function
 Buffer.prototype.readIntLEtemp = function(offset, byteLength, noAssert) {
   offset = offset >>> 0;
   byteLength = byteLength >>> 0;
@@ -1007,7 +1029,7 @@ Buffer.prototype.readIntLEtemp = function(offset, byteLength, noAssert) {
   if (val >= mul)
     val -= Math.pow(2, 8 * byteLength);
 
-  return val;s
+  return val;
 };
 
 // Copy of NodeJS v4 function
@@ -1051,6 +1073,8 @@ function formatAndAssignValue(globalItem, friendlyName, value, status) {
 
     // Convert manufacturer ID to 4 char string
     value = Utilities.formatNumberToHexString(value, 4);
+  } else if (friendlyName === 'manufacturerName') {
+    value = value;
   } else if (friendlyName === 'temperatureValue') {
 
     // Legacy code to ensure contact state temperature is in correct format MJW
@@ -1062,7 +1086,8 @@ function formatAndAssignValue(globalItem, friendlyName, value, status) {
       }
     }
 
-    value = Utilities.convertTemperatureCtoF(value / 100).toFixed(2);
+    //value = Utilities.convertTemperatureCtoF(value / 100).toFixed(2);
+    value = (value / 100).toFixed(2);
   } else if (friendlyName === 'powersumValue') {
     globalItem.rawPowerSumValue = value;
 

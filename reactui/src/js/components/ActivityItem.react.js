@@ -334,7 +334,7 @@ class ActivityItem extends React.Component {
                       </h5>
                       <div className="ui right floated">
                       {(item.data.temperatureValue === undefined) ? 'Loading..' :
-                      item.data.temperatureValue + ' °F'}
+                      item.data.temperatureValue + ' °C'}
                       </div>
                   </div>
                 }

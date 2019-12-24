@@ -158,7 +158,7 @@ class DeviceListControl extends React.Component {
           {item.data.temperatureValue !== undefined &&
             <div className="ui button basic silabsiconbuttons"
               onTouchTap={this.requestTemp.bind(this, item)}>
-              {item.data.temperatureValue + ' °F'}
+              {item.data.temperatureValue + ' °C'}
             </div>
           }
         </div>

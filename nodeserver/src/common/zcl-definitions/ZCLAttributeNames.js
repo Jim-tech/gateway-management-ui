@@ -3,6 +3,9 @@ var Constants = require('../Constants.js');
 // Attributes object for reading.
 var ZCLAttributeNames = {};
 
+ZCLAttributeNames[Constants.BASIC_CLUSTER] = {};
+ZCLAttributeNames[Constants.BASIC_CLUSTER][Constants.MANUFACTURER_NAME_ATTRIBUTE] = 'manufacturerName';
+
 ZCLAttributeNames[Constants.ON_OFF_CLUSTER] = {};
 ZCLAttributeNames[Constants.COLOR_CONTROL_CLUSTER] = {};
 ZCLAttributeNames[Constants.LEVEL_CONTROL_CLUSTER] = {};
@@ -46,6 +49,9 @@ ZCLAttributeNames[Constants.ELECTRICAL_CLUSTER][Constants.ACTIVE_POWER_OVERLOAD_
 
 // Reportable attributes object.
 var ReportableZCLAttributeNames = {};
+
+ReportableZCLAttributeNames[Constants.BASIC_CLUSTER] = {};
+ReportableZCLAttributeNames[Constants.BASIC_CLUSTER][Constants.MANUFACTURER_NAME_ATTRIBUTE] = 'manufacturerName';
 
 ReportableZCLAttributeNames[Constants.TEMPERATURE_CLUSTER] = {};
 ReportableZCLAttributeNames[Constants.TEMPERATURE_CLUSTER][Constants.TEMPERATURE_VAL_ATTRIBUTE] = 'temperatureValue';

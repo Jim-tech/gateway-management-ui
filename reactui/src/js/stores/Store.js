@@ -654,11 +654,13 @@ var Store = Fluxxor.createStore({
     var humanFriendlyDisplay = this.getHumanNameAndImageForDevice(device);
     return {
       name: humanFriendlyDisplay.humanName + ' - ' + device.nodeId +
+            '(' + device.deviceEndpoint.eui64 + ')' +
             ' - ' + device.deviceEndpoint.endpoint +
             ' - (' + nodestate[device.deviceState] + ')',
       simplename: humanFriendlyDisplay.humanName + ' - ' + device.nodeId +
             ' - ' + device.deviceEndpoint.endpoint,
       image: humanFriendlyDisplay.image,
+      desc: humanFriendlyDisplay.humanName,
       data: device,
       ready: device.deviceState >= Constants.ND_JOINED
     };
@@ -723,6 +725,13 @@ var Store = Fluxxor.createStore({
   getHumanReadableLights: function(devices) {
     if (!devices) {
       devices = this.getLights();
+    }
+    return _.map(devices, this.getHumanReadableDevice);
+  },
+
+  getHumanReadableMultiSensors: function(devices) {
+    if (!devices) {
+      devices = this.getMultiSensors();
     }
     return _.map(devices, this.getHumanReadableDevice);
   },
@@ -835,6 +844,13 @@ var Store = Fluxxor.createStore({
     return _.filter(this.getDevices(), function(device) {
       var deviceType = parseInt(device.deviceType);
       return lights[deviceType] || deviceType === 'group' || smartplugs[deviceType];
+    });
+  },
+
+  getMultiSensors: function() {
+    return _.filter(this.getDevices(), function(device) {
+      var deviceType = parseInt(device.deviceType);
+      return sensors[deviceType];
     });
   },
 

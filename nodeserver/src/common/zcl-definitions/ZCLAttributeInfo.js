@@ -5,6 +5,15 @@ var Constants = require('../Constants');
 var DEFAULT_MAX_REPORTING = 1800;
 
 var ZCLAttributeInfo = {
+  manufacturerName:{
+    clusterID: Constants.BASIC_CLUSTER,
+    attributeID: Constants.MANUFACTURER_NAME_ATTRIBUTE,
+    datatype: Constants.MANUFACTURER_NAME_TYPE,
+    clusterFriendly: 'basicCluster',
+    defaultReportableChangeThreshold: 1,
+    defaultReportingMin: 15,
+    defaultReportingMax: 30
+  },  
    firmwareVersion: {
     clusterID: Constants.BOOTLOADER_CLUSTER,
     attributeID: Constants.FIRMWARE_VERSION_ATTRIBUTE,

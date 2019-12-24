@@ -19,6 +19,11 @@ var Constants = {
   // Device Type Table
   NON_SLEEPY_DEVICE_TYPE_TABLE: {},
 
+  //basic Cluster
+  BASIC_CLUSTER: 0x0000,
+  MANUFACTURER_NAME_ATTRIBUTE: 0x0004,
+  MANUFACTURER_NAME_TYPE: 0x0042,
+
   // Decisive Cluster # For In or Out
   IN_OUT_DECISION_CLUSTER: 0x0400,
   // ZigBee On/off Cluster
